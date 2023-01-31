@@ -20,9 +20,9 @@ node {
     stage("SSH Into k8s Server") {
         def remote = [:]
         remote.name = 'K8S master'
-        remote.host = '192.168.29.142'
-        remote.user = 'osboxes'
-        remote.password = 'Anki@1218'
+        remote.host = '192.168.56.101'
+        remote.user = 'vagrant'
+        remote.password = 'vagrant'
         remote.allowAnyHosts = true
         
         stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
