@@ -26,10 +26,12 @@ node {
         remote.allowAnyHosts = true
         
         stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
-            sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
+            sshPut remote: remote, from: 'deployment.yml', into: '.'
+            sshPut remote: remote, from: 'service.yml', into: '.'
         }
         stage('Deploy spring boot to k8s') {
-          sshCommand remote: remote, command: "kubectl apply -f k8s-spring-boot-deployment.yml"
+          sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
+          sshCommand remote: remote, command: "kubectl apply -f service.yml"  
         }
     }
 }
