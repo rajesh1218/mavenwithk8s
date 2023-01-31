@@ -7,15 +7,15 @@ node {
     }
     stage("Docker build"){
         sh 'docker version'
-        sh 'docker build -t rja-boot-app .'
+        sh 'docker build -t rja-web-app .'
         sh 'docker image list'
-        sh 'docker tag rja-boot-app rajesh1218/rja-boot-app:latest'
+        sh 'docker tag rja-web-app rajesh1218/rja-web-app:latest'
     }
     withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
         sh 'docker login -u rajesh1218 -p $PASSWORD'
     }
     stage("Push Image to Docker Hub"){
-        sh 'docker push rajesh1218/rja-boot-app:latest'
+        sh 'docker push rajesh1218/rja-web-app:latest'
     }
     stage("SSH Into k8s Server") {
         def remote = [:]
